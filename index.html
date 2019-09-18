@@ -12,7 +12,10 @@
       boton.addEventListener("pointerup", function(event) {
         console.log("Welcome!");
         navigator.bluetooth
-          .requestDevice({ filters: [{ services: ["battery_service"] }] })
+          .requestDevice({
+            acceptAllDevices: true,
+            optionalServices: ["battery_service"]
+          })
           .then(device => {
             // Human-readable name of the device.
             console.log(device);

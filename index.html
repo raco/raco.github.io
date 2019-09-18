@@ -7,10 +7,26 @@
     <title>Document</title>
   </head>
   <body>
+    <button id="boton">blue2</button>
     <script>
-      button.addEventListener("pointerup", function(event) {
+      boton.addEventListener("pointerup", function(event) {
         console.log("Welcome!");
-        // Call navigator.bluetooth.requestDevice
+        navigator.bluetooth
+          .requestDevice({ filters: [{ services: ["battery_service"] }] })
+          .then(device => {
+            // Human-readable name of the device.
+            console.log(device);
+            console.log(device.name);
+
+            // Attempts to connect to remote GATT Server.
+            return device.gatt.connect();
+          })
+          .then(server => {
+            /* ... */
+          })
+          .catch(error => {
+            console.log(error);
+          });
       });
     </script>
   </body>

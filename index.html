@@ -19,8 +19,7 @@
       console.log("Welcome!");
       navigator.bluetooth
         .requestDevice({
-          acceptAllDevices: true,
-          optionalServices: ["battery_service"]
+          acceptAllDevices: true
         })
         .then(device => {
           // Human-readable name of the device.

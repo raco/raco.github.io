@@ -1,36 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-  </head>
-  <body>
-    <button id="boton">blue2</button>
-    <script>
-      boton.addEventListener("pointerup", function(event) {
-        console.log("Welcome!");
-        navigator.bluetooth
-          .requestDevice({
-            acceptAllDevices: true,
-            optionalServices: ["battery_service"]
-          })
-          .then(device => {
-            // Human-readable name of the device.
-            console.log(device);
-            console.log(device.name);
 
-            // Attempts to connect to remote GATT Server.
-            return device.gatt.connect();
-          })
-          .then(server => {
-            /* ... */
-          })
-          .catch(error => {
-            console.log(error);
-          });
-      });
-    </script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.css">
+</head>
+
+<body>
+  <button id="boton" class="button">SCAN</button>
+  <div id="deviceData">
+
+  </div>
+  <button id="boton" class="button button-clear">Limpiar</button>
+
+  <script>
+    boton.addEventListener("pointerup", function (event) {
+      console.log("Welcome!");
+      navigator.bluetooth
+        .requestDevice({
+          acceptAllDevices: true,
+          optionalServices: ["battery_service"]
+        })
+        .then(device => {
+          // Human-readable name of the device.
+          console.log(device);
+          console.log(device.name);
+          deviceData.innerHTML(JSON.stringify(device));
+          // Attempts to connect to remote GATT Server.
+          return device.gatt.connect();
+        })
+        .then(server => {
+          /* ... */
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    });
+  </script>
+</body>
+
 </html>

@@ -11,10 +11,8 @@
 
 <body>
   <button id="boton" class="button">SCAN</button>
-  <div id="deviceData">
-
-  </div>
-  <button id="boton" class="button button-clear">Limpiar</button>
+  <pre><code id="deviceData"></code></pre>
+  <button id="clean" class="button button-clear">Limpiar</button>
 
   <script>
     boton.addEventListener("pointerup", function (event) {
@@ -28,7 +26,7 @@
           // Human-readable name of the device.
           console.log(device);
           console.log(device.name);
-          deviceData.innerHTML(JSON.stringify(device));
+          deviceData.innerHTML = JSON.stringify(device, null, "\t");
           // Attempts to connect to remote GATT Server.
           return device.gatt.connect();
         })
